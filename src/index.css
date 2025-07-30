@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Lato', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-slack-gray-50 text-slack-gray-900;
+  }
+}
+
+@layer components {
+  .slack-sidebar {
+    @apply bg-slack-primary text-white w-64 min-h-screen flex flex-col;
+  }
+  
+  .slack-channel {
+    @apply px-4 py-2 hover:bg-slack-secondary cursor-pointer transition-colors;
+  }
+  
+  .slack-channel.active {
+    @apply bg-slack-secondary;
+  }
+  
+  .slack-message {
+    @apply flex gap-3 p-4 hover:bg-slack-gray-50 transition-colors;
+  }
+  
+  .slack-input {
+    @apply w-full border border-slack-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slack-accent focus:border-transparent;
+  }
+  
+  .slack-button {
+    @apply bg-slack-accent text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium;
+  }
+  
+  .slack-card {
+    @apply bg-white border border-slack-gray-200 rounded-lg p-4 shadow-sm;
+  }
+} 
