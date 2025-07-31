@@ -1,13 +1,14 @@
 import React from 'react';
 import { Bot, User, Star, Rocket, TrendingUp, ExternalLink, Github } from 'lucide-react';
-import { BotResponse } from '../utils/botLogic';
+import { AgentResponse } from '../utils/agentLogic';
 import { Project, Skill, Experience, Education } from '../data/profile';
+import { ExperiencePostComponent } from './ExperiencePost';
 
 interface MessageProps {
   message: {
     id: string;
     type: 'bot' | 'user';
-    content: string | BotResponse;
+    content: string | AgentResponse;
     timestamp: Date;
     channel: string;
   };
@@ -15,7 +16,14 @@ interface MessageProps {
 
 export const Message: React.FC<MessageProps> = ({ message }) => {
   const isBot = message.type === 'bot';
-  const timestamp = message.timestamp.toLocaleTimeString();
+  const timestamp = message.timestamp.toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
 
   const renderContent = () => {
     if (typeof message.content === 'string') {
@@ -26,7 +34,7 @@ export const Message: React.FC<MessageProps> = ({ message }) => {
       );
     }
 
-    const response = message.content as BotResponse;
+    const response = message.content as AgentResponse;
     
     switch (response.type) {
       case 'message':
@@ -54,6 +62,15 @@ export const Message: React.FC<MessageProps> = ({ message }) => {
       
       case 'education-list':
         return <EducationList education={response.content as Education[]} />;
+      
+      case 'experience-post':
+        return (
+          <div className="space-y-4">
+            {(response.content as any[]).map((post: any, index: number) => (
+              <ExperiencePostComponent key={post.id || index} post={post} />
+            ))}
+          </div>
+        );
       
       default:
         return (

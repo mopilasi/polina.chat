@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, Hash } from 'lucide-react';
 import { Message } from './Message';
-import { BotResponse } from '../utils/botLogic';
+import { AgentResponse } from '../utils/agentLogic';
 import { Channel } from '../App';
 
 interface ChatAreaProps {
   messages: Array<{
     id: string;
     type: 'bot' | 'user';
-    content: string | BotResponse;
+    content: string | AgentResponse;
     timestamp: Date;
     channel: Channel;
   }>;

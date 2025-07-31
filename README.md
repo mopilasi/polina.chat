@@ -30,7 +30,8 @@ A public, web-based, Slack-style profile page that showcases Polina's profession
 - **Icons**: Lucide React for consistent iconography
 - **Build Tool**: Vite for fast development and optimized builds
 - **State Management**: React hooks for local state
-- **Bot Logic**: Custom command parser and response system
+- **AI Integration**: OpenAI GPT-4 for natural language processing
+- **Fallback System**: Custom rule-based responses when OpenAI is unavailable
 
 ## 📦 Installation
 
@@ -45,12 +46,22 @@ A public, web-based, Slack-style profile page that showcases Polina's profession
    npm install
    ```
 
-3. **Start the development server**
+3. **Set up environment variables**
+   ```bash
+   # Copy the environment template
+   cp env.local .env
+   
+   # Add your OpenAI API key to .env (optional)
+   # Get your key from: https://platform.openai.com/api-keys
+   VITE_OPENAI_API_KEY=your_actual_api_key_here
+   ```
+
+4. **Start the development server**
    ```bash
    npm run dev
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to `http://localhost:3000`
 
 ## 🎯 Usage
@@ -62,19 +73,33 @@ A public, web-based, Slack-style profile page that showcases Polina's profession
 4. **View project details** with `/project [name]`
 5. **React to content** with emoji reactions
 
+### For Agent Owner
+1. **Update your information** with the provided script:
+   ```bash
+   node update-agent.js
+   ```
+2. **Add your actual data** from resume, LinkedIn, Twitter, and Instagram
+3. **Test the agent** to ensure it only uses your real information
+4. **Deploy** when ready
+
 ### Available Commands
 - `/experience` - View work history
 - `/skills` - See skills and expertise
 - `/projects` - List all projects
 - `/project [name]` - Get details about a specific project
 - `/education` - View education background
+- `/personality` - Learn about personality and interests
+- `/insights` - Get key insights and principles
 - `/help` - Show available commands
 
 ### Example Questions
 - "What projects have you worked on?"
 - "Tell me about your AI experience"
 - "What's your background in product management?"
-- "Show me your education"
+- "What are your biggest achievements?"
+- "What challenges have you faced?"
+- "What are your values and principles?"
+- "Give me some advice from your experience"
 
 ## 🎨 Customization
 
@@ -92,11 +117,17 @@ Modify `src/index.css` and `tailwind.config.js` to:
 - Adjust Slack-style theming
 - Customize animations and transitions
 
-### Bot Logic
-Update `src/utils/botLogic.ts` to:
-- Add new commands
-- Enhance natural language processing
-- Modify response formats
+### AI Integration
+Update `src/utils/openaiService.ts` to:
+- Modify the system prompt
+- Adjust conversation parameters
+- Add new command mappings
+
+### Agent Data
+Update `src/data/agent.ts` to:
+- Modify personality traits
+- Add new knowledge categories
+- Update conversation patterns
 
 ## 📊 Analytics & Tracking
 
